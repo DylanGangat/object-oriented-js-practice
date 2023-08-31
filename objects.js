@@ -6,10 +6,6 @@ function User(name, email) {
   this.name = name;
   this.email = email;
   this.online = false;
-  // bad practice
-//   this.login = function () {
-//     console.log(`${this.name}'s logged in`);
-//   };
 }
 
 User.prototype.login = function () {
@@ -22,8 +18,27 @@ User.prototype.logout = function () {
   console.log(`${this.name}'s logged out`);
 };
 
-const userOne = new User('Dylan', 'dylan.gangat@gmail.com', true);
-const userTwo = new User('Kyle', 'kyle.gangat@gmail.com', false);
+function Admin(...args) {
+  User.apply(this, args);
+  this.role = 'Super admin';
+}
+
+Admin.prototype = Object.create(User.prototype);
+
+Admin.prototype.deleteUser = function (u) {
+  users = users.filter(u => userOne.email !== u.email);
+};
+
+const userOne = new User('Dylan', 'dylan.gangat@gmail.com');
+const userTwo = new User('Kyle', 'kyle.gangat@gmail.com');
+const admin = new Admin('Bob', 'bob.gangat@gmail.com');
+
+let users = [userOne, userTwo, admin];
+
+console.log(users);
 
 console.log(userOne);
-userOne.login();
+console.log(admin);
+
+admin.deleteUser(userOne);
+console.log(users);
