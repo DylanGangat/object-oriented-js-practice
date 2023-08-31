@@ -18,11 +18,13 @@ User.prototype.logout = function () {
   console.log(`${this.name}'s logged out`);
 };
 
+// Inherits properties from User 
 function Admin(...args) {
   User.apply(this, args);
   this.role = 'Super admin';
 }
 
+// Inherits prototype of User 
 Admin.prototype = Object.create(User.prototype);
 
 Admin.prototype.deleteUser = function (u) {
