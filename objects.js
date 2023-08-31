@@ -1,36 +1,3 @@
-// var userOne = {
-//   email: 'ryu@ninjas.com',
-//   name: 'Ryu',
-//   login() {
-//     console.log(this.email, 'has logged in');
-//   },
-//   logout() {
-//     console.log(this.email, 'has logged out');
-//   },
-// };
-
-// var userTwo = {
-//   email: 'mario@ninjas.com',
-//   name: 'Mario',
-//   login() {
-//     console.log(this.email, 'has logged in');
-//   },
-//   logout() {
-//     console.log(this.email, 'has logged out');
-//   },
-// };
-
-// var userThree = {
-//   email: 'luigi@ninjas.com',
-//   name: 'Luigi',
-//   login() {
-//     console.log(this.email, 'has logged in');
-//   },
-//   logout() {
-//     console.log(this.email, 'has logged out');
-//   },
-// };
-
 class User {
   constructor(name, email, status) {
     this.name = name;
@@ -63,23 +30,20 @@ class User {
   }
 }
 
-// New instances of class User Object
-// Encapsulating everything in the User Object
-
-// the 'new' keyword
-// - creates a new empty object
-// sets the value of this to the empty object
-// invokes the constructor method
+class Admin extends User {
+  deleteUser(user) {
+    users = users.filter(u => u.email !== user.email);
+  }
+}
 
 const userOne = new User('Dylan', 'dylan.gangat@gmail.com', true);
 const userTwo = new User('Kyle', 'kyle.gangat@gmail.com', false);
-const userThree = new User('Bob', 'bob.gangat@gmail.com', false);
+const admin = new Admin('Bob', 'bob.gangat@gmail.com', false);
 
-userOne.logout();
+let users = [userOne, userTwo, admin];
 
-userOne.firstName = 'Mario';
-console.log(userOne.firstName);
-console.log(userOne);
+console.log(users);
 
-// returns object to allow method chaining (return this)
-userOne.login().updateScore().updateScore().logout();
+admin.deleteUser(userOne);
+
+console.log(users);
