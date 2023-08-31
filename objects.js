@@ -1,49 +1,29 @@
-class User {
-  constructor(name, email, status) {
-    this.name = name;
-    this.email = email;
-    this.status = status;
-    this.score = 0;
-  }
-
-  login() {
-    console.log(this.email, 'has logged in');
-    return this;
-  }
-
-  logout() {
-    console.log(this.email, 'has logged out');
-    return this;
-  }
-
-  updateScore() {
-    this.score += 1;
-    console.log(`${this.email} score is now: ${this.score}`);
-    return this;
-  }
-  get firstName() {
-    return this.name;
-  }
-
-  set firstName(firstName) {
-    this.name = firstName;
-  }
+// Constructor function
+// These methods arent in __proto__ like they are in classes. They are directly in the constructor
+// Attach method to User prototype and not object (Object, Array, Date - has prototype)
+// Defining the method once with proto so you dont need to create a method for each object being created
+function User(name, email) {
+  this.name = name;
+  this.email = email;
+  this.online = false;
+  // bad practice
+//   this.login = function () {
+//     console.log(`${this.name}'s logged in`);
+//   };
 }
 
-class Admin extends User {
-  deleteUser(user) {
-    users = users.filter(u => u.email !== user.email);
-  }
-}
+User.prototype.login = function () {
+  this.online = true;
+  console.log(`${this.name}'s logged in`);
+};
+
+User.prototype.logout = function () {
+  this.online = false;
+  console.log(`${this.name}'s logged out`);
+};
 
 const userOne = new User('Dylan', 'dylan.gangat@gmail.com', true);
 const userTwo = new User('Kyle', 'kyle.gangat@gmail.com', false);
-const admin = new Admin('Bob', 'bob.gangat@gmail.com', false);
 
-let users = [userOne, userTwo, admin];
-
-console.log(users);
-
-admin.deleteUser(userOne);
-
-console.log(users);
+console.log(userOne);
+userOne.login();
